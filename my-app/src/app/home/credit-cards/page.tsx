@@ -29,7 +29,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
     const plugin = React.useRef(
@@ -88,8 +88,8 @@ export default function Home() {
                             <TableCell>active</TableCell>
                             <TableCell>$500.00</TableCell>
                             <TableCell>
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5" onClick={() => handleAddCard()}>Edit Card</button>
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleAddCard()}>Remove Card</button>
+                                <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5" onClick={() => handleAddCard()}>Edit Card</Button>
+                                <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleAddCard()}>Remove Card</Button>
                             </TableCell>
                         </TableRow>
                     ))}
