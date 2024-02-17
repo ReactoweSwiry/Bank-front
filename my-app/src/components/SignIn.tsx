@@ -4,6 +4,19 @@ import Opole from '@/assets/Opole.jpg';
 import Opole2 from '@/assets/Opole2.jpg';
 import Opole3 from '@/assets/Opole3.jpg';
 import Image from 'next/image';
+import { Button } from "@/components/ui/button"
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 const images = [
     Opole,
     Opole2,
@@ -48,13 +61,15 @@ const SignIn = () => {
         return () => clearInterval(interval); // Cleanup the interval on component unmount
 
     }, [])
+
     return (
         mounted && (
             <div className="flex flex-row h-screen">
-                <div className="w-full md:w-2/5 flex flex-col justify-center items-center m-6">
-                    <p className="text-2xl font-bold mb-4">{forgotPassword ? 'Bank Register' : 'Bank Sign In'}</p>
+                <div className="w-full md:w-2/5 flex flex-col justify-center items-center">
+
                     {forgotPassword ? (
                         <>
+                            <p className="text-2xl font-bold mb-4">Password recovery</p>
                             <form className="max-w-sm">
                                 <p>Enter your email address to reset your password:</p>
                                 <input type="email" className="border border-gray-300 rounded-md p-2 w-full" />
@@ -64,23 +79,63 @@ const SignIn = () => {
                         </>
                     ) : (
                         <>
-                            <form onSubmit={handleSubmit} className="max-w-sm">
-                                <label className="block mb-2">
-                                    Username:
-                                    <input type="text" value={username} onChange={handleUsernameChange} className="border border-gray-300 rounded-md p-2 w-full" />
-                                </label>
-                                <br />
-                                <label className="block mb-2">
-                                    Password:
-                                    <input type="password" value={password} onChange={handlePasswordChange} className="border border-gray-300 rounded-md p-2 w-full" />
-                                </label>
-                                <br />
-                                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">{isRegister ? 'Register' : 'Sign In'}</button>
-                                <button onClick={handleForgotPassword} className="text-blue-500 underline mt-2 ml-5">Forgot Password?</button>
-                            </form>
-                            <div className="mt-4">
-                                <button onClick={handleToggleForm} className="text-blue-500 underline">{isRegister ? 'Already have an account? Sign In' : 'Don\'t have an account? Register'}</button>
-                            </div>
+                            <Tabs defaultValue="signin" className="w-[400px]">
+                                <TabsList className="grid w-full grid-cols-2">
+                                    <TabsTrigger value="signin">Sign In</TabsTrigger>
+                                    <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                                </TabsList>
+                                <TabsContent value="signin">
+                                    <Card>
+                                        <CardHeader>
+                                            <CardTitle>Sign In</CardTitle>
+                                            <CardDescription>
+                                                Enter your credentials to sign in. Click submit when you're done.
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="space-y-2">
+                                            <div className="space-y-1">
+                                                <Label htmlFor="username">Username</Label>
+                                                <Input id="username" defaultValue="" className="w-full" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <Label htmlFor="password">Password</Label>
+                                                <Input id="password" type="password" defaultValue="" className="w-full" />
+                                            </div>
+                                        </CardContent>
+                                        <CardFooter>
+                                            <Button>Submit</Button>
+                                        </CardFooter>
+                                    </Card>
+                                </TabsContent>
+                                <TabsContent value="signup">
+                                    <Card>
+                                        <CardHeader>
+                                            <CardTitle>Sign Up</CardTitle>
+                                            <CardDescription>
+                                                Create a new account. Fill in the required information and click submit.
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="space-y-2">
+                                            <div className="space-y-1">
+                                                <Label htmlFor="name">Name</Label>
+                                                <Input id="name" defaultValue="" className="w-full" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <Label htmlFor="email">Email</Label>
+                                                <Input id="email" type="email" defaultValue="" className="w-full" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <Label htmlFor="password">Password</Label>
+                                                <Input id="password" type="password" defaultValue="" className="w-full" />
+                                            </div>
+                                        </CardContent>
+                                        <CardFooter>
+                                            <Button>Submit</Button>
+                                        </CardFooter>
+                                    </Card>
+                                </TabsContent>
+                            </Tabs>
+                            <button onClick={handleForgotPassword} className="text-white-500 underline mt-2 ml-5">Forgot Password?</button>
                         </>
                     )}
                 </div>

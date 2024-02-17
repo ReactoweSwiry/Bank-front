@@ -101,7 +101,7 @@ export function NavigationMenuHome() {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/sign-in" legacyBehavior passHref>
+                    <Link href="/auth" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Logout
                         </NavigationMenuLink>
