@@ -67,7 +67,7 @@ export default function Home() {
             <h2 className="text-2xl font-bold">Credit Cards</h2>
             <h3 className="text-base">here you can check your credit cards. Activate deactivate one</h3>
 
-            <Table className="table-fixed border-">
+            <Table className="table-fixed">
                 <TableCaption>Credit Cards in your account</TableCaption>
                 <TableHeader>
                     <TableRow>
@@ -82,11 +82,11 @@ export default function Home() {
                 <TableBody>
                     {CreditCards.map((card, index) => (
                         <TableRow key={index}>
-                            <TableCell>{card.number}</TableCell>
-                            <TableCell>{card.name}</TableCell>
-                            <TableCell>{card.expiry}</TableCell>
-                            <TableCell>active</TableCell>
-                            <TableCell>$500.00</TableCell>
+                            <TableCell className="truncate">{card.number}</TableCell>
+                            <TableCell className="truncate">{card.name}</TableCell>
+                            <TableCell className="truncate">{card.expiry}</TableCell>
+                            <TableCell className="truncate">active</TableCell>
+                            <TableCell className="truncate">$500.00</TableCell>
                             <TableCell>
                                 <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5" onClick={() => handleAddCard()}>Edit Card</Button>
                                 <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleAddCard()}>Remove Card</Button>

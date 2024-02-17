@@ -5,7 +5,6 @@ export default function Home() {
         <header className='size-full'>
             <h1 className="text-4xl font-bold">Bank App</h1>
             <ModeToggle />
-            <Button>Button</Button>
         </header>
     );
 };
