@@ -16,17 +16,19 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <main className='bg-gray-100 dark:bg-gray-800 h-screen'>
+        <main className='bg-zinc-100 dark:bg-zinc-900 h-screen'>
             <div className="flex justify-between h-16 px-4 items-center border-b">
                 <NavigationMenuHome />
                 <AvatarComponent />
             </div>
 
-            <div className='rounded-xl shadow-md p-8 dark:bg-gray-700 bg-white mt-8 mx-8'>
+            <div className='rounded-xl shadow-md p-8 dark:bg-zinc-800 bg-white mt-8 mx-8'>
                 <StoreProvider>{children}</StoreProvider>
             </div>
-            <footer className='dark:bg-gray-800 dark:text-white absolute inset-x-0 bottom-0 h-16' style={{ textAlign: 'center' }}>
-                Matt Patt Design ©2023 Created by Matt5246
+            <footer className='dark:bg-zinc-800 dark:text-white absolute inset-x-0 bottom-0 h-16 flex justify-center items-center'>
+                <span>
+                    Matt Patt Design ©2023 Created by Matt5246
+                </span>
             </footer>
         </main>
     )
