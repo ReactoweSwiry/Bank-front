@@ -13,6 +13,9 @@ const exampleArray = [
     { title: "Total Revenue", description: "Total revenue generated", content: "$100,000" },
     { title: "Subscriptions", description: "Number of subscriptions", content: "+500" },
     { title: "Money Values", description: "Various money values", content: "$10,000" },
+    { title: "New Customers", description: "Number of new customers", content: "+100" },
+    { title: "Expenses", description: "Total expenses", content: "$50,000" },
+    { title: "Profit", description: "Total profit", content: "$50,000" },
 ];
 
 const renderCards = () => {
