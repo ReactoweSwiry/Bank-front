@@ -38,15 +38,14 @@ const SignIn: React.FC = () => {
   })
 
   const mutation = useMutation({
-    mutationFn: async (values: z.infer<typeof formSchema>) => {
-      const res = await axios.post("http://localhost:3333/auth/login", values);
-      return res;
+    mutationFn: (values: z.infer<typeof formSchema>) => {
+      return axios.post("http://localhost:3333/auth/login", values);
     }
   })
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
-    mutation.mutateAsync(values);
+    mutation.mutate(values);
   }
 
   if (mutation.isPending) console.log("Pending...");
