@@ -25,9 +25,9 @@ const formSchema = z.object({
   fullName: z.string(),
   username: z.string(),
   email: z.string().email({ message: "Invalid email" }),
-  age: z.number().min(18),
+  password: z.string(),
+  age: z.coerce.number().gte(18, 'Must be 18 and above'),
   gender: z.nativeEnum(GenderOpt),
-  password: z.string()
 })
 
 const SignUp: React.FC = () => {
@@ -37,9 +37,9 @@ const SignUp: React.FC = () => {
       fullName: "",
       username: "",
       email: "",
+      password: "",
       age: 0,
       gender: GenderOpt.UNSPECIFIED,
-      password: ""
     },
   })
 
@@ -104,7 +104,7 @@ const SignUp: React.FC = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="password" {...field} type='password' />
+                    <Input placeholder="password" {...field} type="password" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -117,7 +117,7 @@ const SignUp: React.FC = () => {
                 <FormItem>
                   <FormLabel>Age</FormLabel>
                   <FormControl>
-                    <Input placeholder="age" {...field} type='number' />
+                    <Input placeholder="age" {...field} type="number" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
