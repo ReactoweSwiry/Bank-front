@@ -13,6 +13,10 @@ const AuthPage = () => {
 		<div className="flex flex-row h-screen">
 			<ModeToggle />
 			<div className="w-full md:w-3/5 flex flex-col justify-center items-center">
+				<h2 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 
+					bg-clip-text text-transparent text-5xl font-black pb-4 uppercase">
+					Bank Opole
+				</h2>
 				<Tabs defaultValue="signin" className="w-[400px]">
 					<TabsList className="grid w-full grid-cols-2">
 						<TabsTrigger value="signin">Sign In</TabsTrigger>
@@ -26,12 +30,8 @@ const AuthPage = () => {
 					</TabsContent>
 				</Tabs>
 			</div>
-			<div className='hidden md:flex md:w-3/5 bg-gray-200 justify-center items-center'>
-				{/*<h2 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 
-					bg-clip-text text-transparent text-5xl font-black">
-					Bank Opole
-				</h2>*/}
-				<Image src={opoleAnimated} alt="Opole animated logo" className="w-full h-full object-cover"/>
+			<div className='hidden md:flex md:w-3/5 bg-gray-900 justify-center items-center'>
+				<Image src={opoleAnimated} alt="Opole animated logo" className="w-full h-full object-cover opacity-50" />
 			</div>
 		</div>
 	)
