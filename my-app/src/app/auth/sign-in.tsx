@@ -1,13 +1,15 @@
 "use client"
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+
+import { AlertDestructive } from '@/components/custom/alert.error';
+import { Progress } from '@/components/ui/progress';
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,6 +19,9 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
+import { useMutation } from '@tanstack/react-query';
+import axios from "axios"
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -32,9 +37,20 @@ const SignIn: React.FC = () => {
     }
   })
 
+  const mutation = useMutation({
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      const res = await axios.post("http://localhost:3333/auth/login", values);
+      return res;
+    }
+  })
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    mutation.mutateAsync(values);
   }
+
+  if (mutation.isPending) console.log("Pending...");
+  if (mutation.isError) console.error(mutation.error);
 
   return (
     <Card>
@@ -54,7 +70,7 @@ const SignIn: React.FC = () => {
                 <FormItem>
                   <FormLabel>E-mail</FormLabel>
                   <FormControl>
-                    <Input placeholder="e-mail" {...field} />
+                    <Input placeholder="e-mail" {...field} type="email" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -67,14 +83,15 @@ const SignIn: React.FC = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="password" {...field} />
+                    <Input placeholder="password" {...field} type="password" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{mutation.isPending ? <Progress /> : "Submit"}</Button>
           </form>
+          {mutation.isError ? <AlertDestructive /> : ""}
         </Form>
       </CardContent>
     </Card>
