@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 import { AlertDestructive } from '@/components/custom/alert.error';
-import { Progress } from '@/components/ui/progress';
+import { LoadingSpinner } from '@/components/custom/spinner.loading';
 
 import {
   Form,
@@ -89,9 +89,9 @@ const SignIn: React.FC = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">{mutation.isPending ? <Progress /> : "Submit"}</Button>
+            <Button type="submit">{mutation.isPending ? <LoadingSpinner /> : "Submit"}</Button>
           </form>
-          {mutation.isError ? <AlertDestructive /> : ""}
+          {mutation.isError ? <AlertDestructive message={mutation.error.message} /> : ""}
         </Form>
       </CardContent>
     </Card>
