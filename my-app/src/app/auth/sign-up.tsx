@@ -5,6 +5,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectItem, SelectContent, SelectValue, SelectTrigger } from '@/components/ui/select';
+import { LoadingSpinner } from '@/components/custom/spinner.loading';
+import { AlertDestructive } from '@/components/custom/alert.error';
 
 import {
   Form,
@@ -18,6 +20,9 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
+
+import { useMutation } from '@tanstack/react-query';
+import axios from "axios"
 
 import { GenderOpt } from './auth.enum';
 
@@ -43,9 +48,19 @@ const SignUp: React.FC = () => {
     },
   })
 
+  const mutation = useMutation({
+    mutationFn: (values: z.infer<typeof formSchema>) => {
+      return axios.post("http://localhost:3333/auth/register", values);
+    }
+  })
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+    console.log(values);
+    mutation.mutate(values);
   }
+
+  if (mutation.isPending) console.log("Pending...");
+  if (mutation.isError) console.error(mutation.error);
 
   return (
     <Card>
@@ -145,8 +160,9 @@ const SignUp: React.FC = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{mutation.isPending ? <LoadingSpinner /> : "Submit"}</Button>
           </form>
+          {mutation.isError ? <AlertDestructive message={mutation.error.message} /> : ""}
         </Form>
       </CardContent>
     </Card>
