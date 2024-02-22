@@ -27,7 +27,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ cvc, name, number, expiry }) 
 				number={number}
 				expiry={expiry}
 				focused={focused}
-
 			/>
 		</div>
 	);

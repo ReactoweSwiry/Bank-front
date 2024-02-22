@@ -14,22 +14,21 @@ import {
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 
-import {
-	Avatar,
-	AvatarFallback,
-	AvatarImage,
-} from "@/components/ui/avatar"
-
 const components: { title: string; href: string; description: string }[] = [
 	{
-		title: 'BankOpole',
+		title: 'Home',
 		href: '/home',
-		description: 'Description for BankOpole'
+		description: 'Starting page'
 	},
 	{
-		title: 'My accounts & Transactions',
+		title: 'Accounts',
+		href: '/home/accounts',
+		description: 'Description for my account/accounts'
+	},
+	{
+		title: 'Transactions',
 		href: '/home/transactions',
-		description: 'Description for My accounts & Transactions'
+		description: 'Transaction history'
 	},
 	{
 		title: 'Payments & Transfers',
@@ -50,52 +49,18 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function NavigationMenuHome() {
 	return (
-		<NavigationMenu >
+		<NavigationMenu>
 			<NavigationMenuList>
 				<NavigationMenuItem>
-					<NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-					<NavigationMenuContent>
-						<ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-							<li className="row-span-3">
-								<NavigationMenuLink asChild>
-									<a
-										className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-										href="/"
-									>
-										<div className="mb-2 mt-4 text-lg font-medium">
-											shadcn/ui
-										</div>
-										<p className="text-sm leading-tight text-muted-foreground">
-											Beautifully designed components built with Radix UI and
-											Tailwind CSS.
-										</p>
-									</a>
-								</NavigationMenuLink>
-							</li>
-							<ListItem href="/docs" title="Introduction">
-								Re-usable components built using Radix UI and Tailwind CSS.
-							</ListItem>
-							<ListItem href="/docs/installation" title="Installation">
-								How to install dependencies and structure your app.
-							</ListItem>
-							<ListItem href="/docs/primitives/typography" title="Typography">
-								Styles for headings, paragraphs, lists...etc
-							</ListItem>
-						</ul>
-					</NavigationMenuContent>
-				</NavigationMenuItem>
-				<NavigationMenuItem>
-					<NavigationMenuTrigger>Components</NavigationMenuTrigger>
+					<NavigationMenuTrigger>Services</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
 							{components.map((component) => (
-								<ListItem
-									key={component.title}
-									title={component.title}
-									href={component.href}
-								>
-									{component.description}
-								</ListItem>
+								<Link href={component.href} key={component.title}>
+									<ListItem title={component.title}>
+										{component.description}
+									</ListItem>
+								</Link>
 							))}
 						</ul>
 					</NavigationMenuContent>
@@ -108,7 +73,6 @@ export function NavigationMenuHome() {
 					</Link>
 				</NavigationMenuItem>
 			</NavigationMenuList>
-
 		</NavigationMenu>
 	)
 }
